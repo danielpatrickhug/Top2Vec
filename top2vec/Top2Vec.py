@@ -120,6 +120,10 @@ def get_chunks(tokens, chunk_length, max_num_chunks, chunk_overlap_ratio):
             for i in list(range(0, num_tokens, int(chunk_length * (1 - chunk_overlap_ratio))))[0:num_chunks]]
 
 
+def cosine_similarity(a, b):
+    return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
+
+
 def get_random_chunks(tokens, chunk_length, chunk_len_coverage_ratio, max_num_chunks):
     """Split a document into chunks starting at random positions
 
@@ -784,7 +788,7 @@ class Top2Vec:
 
         return document_vectors
 
-    def _embed_query(self, query):
+    def embed_query(self, query):
         self._check_import_status()
         self._check_model_status()
 
